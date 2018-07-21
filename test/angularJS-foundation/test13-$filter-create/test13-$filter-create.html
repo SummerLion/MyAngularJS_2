@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MVC 示例</title>
+        <meta charset="utf-8">
+    </head>
+
+    <body ng-app="myApp">
+        <div ng-controller="myController1">
+            <h3>1.在html中使用自定义countLength过滤器:</h3>
+            <p>{{"abcde" | countLength}}</p>
+
+            <h3>2.在js中使用自定义countLength过滤器:</h3>
+            <p>{{strLength}}</p>
+        </div>
+    </body>
+
+    <script src="../../../lib/angular.js"></script>
+    <script>
+        var myApp = angular.module("myApp", []);
+
+        // 创建一个计算字符串长度的过滤器
+        myApp.filter("countLength", function(){
+            return function(inputStr) {
+                if (typeof inputStr === "string") {
+                    return inputStr.length;
+                } else {
+                    return "error : you must input string";
+                }
+            };
+        });
+
+        myApp.controller("myController1", ["$scope", "$filter", function($scope, $filter){
+            $scope.strLength = $filter("countLength")(23);
+        }]);
+    </script>
+</html>

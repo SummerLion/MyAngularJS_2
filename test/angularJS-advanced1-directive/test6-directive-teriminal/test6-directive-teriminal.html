@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+    <head>
+        <title>指令属性terminal 示例</title>
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <div ng-if="false" hello></div>
+    </body>
+
+    <script src="../../../lib/angular.js"></script>
+    <script>
+        var myApp = angular.module("myApp", []);
+
+        myApp.directive("hello", function(){
+            return {
+                restrict : "EA",
+                template : "<h3>hello angularJS</h3>",
+                replace : true,
+                priority :501, // ngIf指令的pority是600
+                terminal : true, // terminal设置为true，priority值又比ngIf的大，导致ngIf指令不生效
+                compile : function() {
+                    console.log("compile");
+
+                    return {
+                        pre : function() {
+                            console.log("pre link")
+                        },
+                        post : function() {
+                            console.log("post link")
+                        }
+                    };
+                }
+            };
+        });
+    </script>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MVC 示例</title>
+        <meta charset="utf-8">
+    </head>
+
+    <body ng-app="myApp">
+        <div ng-controller="myController1">
+            <div ng-controller="myController11">
+                <p>{{greeting.text}}</p>
+                <button ng-click="changeValue()"> change Value</button>
+            </div>
+        </div>
+    </body>
+
+    <script src="../../../lib/angular.js"></script>
+    <script>
+        var myApp = angular.module("myApp", []);
+
+        myApp.controller("myController1", ["$scope", function($scope){
+            $scope.greeting = {
+                text : "hello angular"
+            };
+
+            $scope.changeValue = function() {
+                $scope.greeting.text = "aaaaaaaaaaaaaa"
+            };
+        }]);
+
+        myApp.controller("myController11", ["$scope", function($scope){}]);
+    </script>
+</html>

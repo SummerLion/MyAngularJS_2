@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MVC 示例</title>
+        <meta charset="utf-8">
+    </head>
+
+    <body ng-app="myApp">
+        <div ng-controller="myController1">
+            <h3>1.属性表达式：greeting.text 和 greeting.name</h3>
+            <p>greeting.text有定义：{{greeting.text}}</p>
+            <p>greeting.name未定义：{{greeting.name}}</p>
+
+            <br><br>
+            <h3>2.运算表达式：num1 + num2</h3>
+            <p>num1=5, num2=8时结果是：{{num1 + num2}}</p>
+            <button ng-click="changeNum1()">change num1</button>
+
+            <br><br>
+            <h3>3.含有时间过滤器的表达式：currentDate | date:'yyyy-MM-dd HH:mm:ss Z'</h3>
+            <p>currentDate=new Date()时结果是：{{currentDate | date:'yyyy-MM-dd HH:mm:ss Z'}}</p>
+        </div>
+    </body>
+
+    <script src="../../../lib/angular.js"></script>
+    <script>
+        var myApp = angular.module("myApp", []);
+        myApp.controller("myController1", ["$scope", function($scope){
+            $scope.greeting = {
+                text : "hello angular"
+            };
+
+            $scope.num1 = 5;
+            $scope.num2 = 8;
+
+            $scope.currentDate = new Date();
+
+            $scope.changeNum1 = function() {
+                $scope.num1 += 1;
+            };
+        }]);
+    </script>
+</html>

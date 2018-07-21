@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>指令属性 示例</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+<div ng-controller="myController">
+    <hello flater="sayHello(name)"></hello>
+</div>
+</body>
+
+<script src="../../../lib/angular.js"></script>
+<script>
+    var myApp = angular.module("myApp", []);
+    myApp.controller("myController", ["$scope", function($scope){
+        $scope.sayHello = function(name) {
+            alert("hello " + name);
+        };
+    }]);
+
+    myApp.directive("hello", function(){
+        return {
+            restrict : "EA",
+            templateUrl : "test12-template.html",
+            replace : true,
+            scope : {
+                flater : "&",
+                innerFlater : "&flater"
+            },
+            link : function(scope) {
+                scope.clickFn1 = function() {
+                    scope.flater({name : "angularJS"});
+                };
+                scope.clickFn2 = function() {
+                    scope.innerFlater({name : "张三"});
+                };
+            }
+        };
+    });
+</script>
+</html>

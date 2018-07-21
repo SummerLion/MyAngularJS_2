@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+    <head>
+        <title>MVC 示例</title>
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <div ng-controller="myController">
+            <h3>
+                当前时间是: <span ng-bind="date"></span>
+            </h3>
+        </div>
+    </body>
+
+    <script src="../../../lib/angular.js"></script>
+    <script>
+        var myApp = angular.module("myApp", []);
+
+        myApp.controller("myController", controllerFn);
+
+        // 显式注入声明方式
+        controllerFn.$inject = ["$scope", "$filter"];
+        function controllerFn($scope, $filter){
+            $scope.date = $filter("date")(new Date(), "yyyy-MM-dd HH:mm");
+        };
+    </script>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>指令属性 示例</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <level-one>
+        <level-two>
+            <level-three>
+                Hello
+            </level-three>
+        </level-two>
+    </level-one>
+</body>
+
+<script src="../../../lib/angular.js"></script>
+<script >
+    var myApp = angular.module("myApp", []);
+
+    function createDirective(name){
+        return function(){
+            return {
+                restrict: 'E',
+                controller : function($scope, $element, $attrs) {
+                    console.log(name + ': controller');
+                },
+                compile: function(tElem, tAttrs){
+                    console.log(name + ': compile');
+                    return {
+                        pre: function(scope, iElem, iAttrs){
+                            console.log(name + ': pre link');
+                        },
+                        post: function(scope, iElem, iAttrs){
+                            console.log(name + ': post link');
+                        }
+                    };
+                }
+            }
+        }
+    }
+    myApp.directive('levelOne', createDirective('levelOne'));
+    myApp.directive('levelTwo', createDirective('levelTwo'));
+    myApp.directive('levelThree', createDirective('levelThree'));
+</script>
+</html>

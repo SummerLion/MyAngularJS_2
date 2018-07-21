@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>指令属性 示例</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+<div ng-controller="myController">
+    <div hello></div>
+    <h3>{{introduce.text}}</h3>
+</div>
+</body>
+
+<script src="../../../lib/angular.js"></script>
+<script>
+    var myApp = angular.module("myApp", []);
+
+    myApp.controller("myController", ["$scope", function($scope){
+        $scope.greeting = {
+            text : "hello AngularJS"
+        };
+    }]);
+
+    myApp.directive("hello", function(){
+        return {
+            restrict : "EA",
+            template : "<h3>{{greeting.text}}</h3>",
+            replace : true,
+            scope : {},
+            link : function(scope) {
+                console.log(scope);
+                scope.introduce = {
+                    text : "I am zhaoweikai"
+                }
+            }
+        };
+    });
+</script>
+</html>

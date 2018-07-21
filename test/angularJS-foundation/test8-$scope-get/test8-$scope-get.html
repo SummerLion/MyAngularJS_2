@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MVC 示例</title>
+        <meta charset="utf-8">
+    </head>
+
+    <body ng-app="myApp">
+        <div ng-controller="myController1">
+            <p id="1">{{greeting.text}}</p>
+        </div>
+    </body>
+    <script src="../../../lib/jquery.js"></script>
+    <script src="../../../lib/angular.js"></script>
+    <script>
+        var myApp = angular.module("myApp", []);
+
+        myApp.controller("myController1", ["$scope", function($scope){
+            $scope.greeting = {
+                text : "hello angular"
+            };
+        }]);
+
+        setTimeout(function(){
+            // angular.element()方法与jquery的$()一样
+            console.log(angular.element("#1").scope());
+            console.log(angular.element("body").scope());
+        })
+
+    </script>
+</html>

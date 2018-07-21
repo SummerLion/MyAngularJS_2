@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MVC 示例</title>
+        <meta charset="utf-8">
+    </head>
+
+    <body ng-app="myApp">
+        <div ng-controller="myController1">
+            <h3>1.在html中使用时间过滤器:</h3>
+            <p>{{currentDate | date:'yyyy-MM-dd HH:mm:ss'}}</p>
+
+            <h3>2.在js中使用时间过滤器:</h3>
+            <p>{{formatDate}}</p>
+
+            <h3>3.多个参数:</h3>
+            <p> {{ "abcdefg" | limitTo:2:0 }}</p>
+
+            <h3>4.多个过滤器:</h3>
+            <p> {{ "abcdefg" | limitTo:2:1 | uppercase}}</p>
+        </div>
+    </body>
+
+    <script src="../../../lib/angular.js"></script>
+    <script>
+        var myApp = angular.module("myApp", []);
+        myApp.controller("myController1", ["$scope", "$filter", function($scope, $filter){
+            $scope.currentDate = new Date();
+
+            $scope.formatDate = $filter("date")($scope.currentDate, 'yyyy-MM-dd HH:mm:ss');
+        }]);
+    </script>
+</html>

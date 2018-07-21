@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+    <head>
+        <title>MVC 示例</title>
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <div ng-controller="myController1">
+            <h3>
+                hello {{name1}}
+            </h3>
+        </div>
+
+        <div ng-controller="myController2">
+            <h3>
+                hello {{name2}}
+            </h3>
+        </div>
+    </body>
+
+    <script src="../../../lib/angular.js"></script>
+    <script>
+        var myApp = angular.module("myApp", []);
+
+        myApp.factory("nameService", function() {
+            // 通过打印日志可以看出：即使nameservice被多个控制器使用，但只会实例化一次（即执行一次这个函数）
+            console.log("instance nameService");
+
+            var name = "张三";
+
+            return {
+                getName : function() {
+                    return name;
+                },
+
+                setName : function(newName) {
+                    name = newName;
+                }
+            };
+        })
+
+        myApp.controller("myController1", ["$scope", "nameService",  function($scope, nameService){
+            // 所有控制器都调用nameService服务的方法获取name
+            // 说明：服务能提供一些公共方法，供所有控制器使用
+            $scope.name1 = nameService.getName();
+
+            // 修改nameService中值，其它控制器中再获取到的name就变成了修改后的值。
+            // 说明：服务能在整个应用生命周期内保存数据，可以实现各个控制器之间的通信。
+            nameService.setName("李四");
+        }]);
+
+        myApp.controller("myController2", ["$scope", "nameService",  function($scope, nameService){
+            $scope.name2 = nameService.getName();
+        }]);
+    </script>
+</html>

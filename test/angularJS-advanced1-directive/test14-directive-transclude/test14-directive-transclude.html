@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>指令属性 示例</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+<div ng-controller="myController">
+    <div hello>
+        <div>I am {{name}}</div>
+    </div>
+</div>
+</body>
+
+<script src="../../../lib/angular.js"></script>
+<script>
+    var myApp = angular.module("myApp", []);
+
+    myApp.controller("myController", ["$scope", function($scope){
+        $scope.name = "张三";
+    }]);
+
+    myApp.directive("hello", function(){
+        return {
+            restrict : "EA",
+            templateUrl : "test14-template.html",
+            replace : true,
+            scope : true,
+            transclude : true,
+            link : function(scope) {
+                scope.greeting = {
+                    text : "hello angularjs"
+                };
+                scope.name = "李四"; // 模板上ngTransclude指令搞进来的DOM上name属性，依然是父作用域值。
+            }
+        };
+    });
+</script>
+</html>

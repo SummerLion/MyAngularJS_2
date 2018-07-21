@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>指令 示例</title>
+    <meta charset="utf-8">
+</head>
+<body>
+<h3 ng-init="greeting = 'hello '" d2 d1>{{greeting}}</h3>
+</body>
+
+<script src="../../../lib/angular.js"></script>
+<script>
+    var myApp = angular.module("myApp", []);
+    myApp.directive('d1',function() {
+        return{
+            scope : true,
+            link: {
+                pre : function (scope) {
+                    scope.greeting = 'JS ';
+                    console.log(scope);
+                }
+            }
+        };
+    });
+    myApp.directive('d2',function() {
+        return{
+            priority : 1,
+            scope : true,
+            link: {
+                pre : function (scope) {
+                    scope.greeting = 'Angular ';
+                    console.log(scope);
+                }
+            }
+        };
+    });
+</script>
+</html>

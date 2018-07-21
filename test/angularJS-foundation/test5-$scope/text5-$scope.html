@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+    <head>
+        <title>MVC 示例</title>
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+
+        <div ng-controller="myController">
+            <input type="text" ng-model="greeting.text">
+            <p>{{greeting.text}}</p>
+        </div>
+    </body>
+
+    <script src="../../../lib/angular.js"></script>
+    <script>
+        var myApp = angular.module("myApp", []);
+        myApp.controller("myController", ["$scope", function($scope){
+            $scope.greeting = {
+                text : "hello Angular"
+            };
+
+            // 通过$scope的方法$watch监控$scope的属性greeting.text变化，当变化时进行业务逻辑处理
+            $scope.$watch("greeting.text", function(newValue, oldValue) {
+                console.log("当前输入框内容是：" + newValue);
+            })
+        }]);
+    </script>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MVC 示例</title>
+        <meta charset="utf-8">
+        <style>
+            .border-line {
+                border: 1px solid red;
+                padding: 2px;
+                margin: 6px;
+            }
+        </style>
+    </head>
+
+    <body ng-app="myApp">
+        <div class="border-line" ng-controller="myController1">
+            <p>当前控制器的id是：{{id}}</p>
+
+            <div class="border-line" ng-controller="myController11">
+                <p>当前控制器的id是：{{id}}</p>
+            </div>
+        </div>
+
+        <div  class="border-line" ng-controller="myController2">
+            <p>当前控制器的id是：{{id}}</p>
+        </div>
+    </body>
+
+    <script src="../../../lib/angular.js"></script>
+    <script>
+        var myApp = angular.module("myApp", []);
+
+        myApp.controller("myController1", ["$scope", function($scope){
+            $scope.id = "1";
+        }]);
+
+        myApp.controller("myController2", ["$scope", function($scope){
+            $scope.id = "2";
+        }]);
+
+        myApp.controller("myController11", ["$scope", function($scope){
+            $scope.id = "11";
+            console.log($scope); // 当前$scope
+            console.log($scope.$parent); // id=1的$scope
+            console.log($scope.$parent.$parent);// $rootScope
+            console.log($scope.$parent.$parent.$parent); //null
+        }]);
+    </script>
+</html>

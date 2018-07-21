@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>指令属性 示例</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+<div ng-controller="myController">
+    <hello my-model= "parentModel"></hello>
+</div>
+</body>
+
+<script src="../../../lib/angular.js"></script>
+<script>
+    var myApp = angular.module("myApp", []);
+
+    myApp.controller("myController", ["$scope", function($scope){
+        $scope.parentModel = "hello";
+        $scope.$watch("parentModel", function(newValue) {
+            console.log("父scope属性parentModel值：" + $scope.parentModel);
+        });
+    }]);
+
+    myApp.directive("hello", function(){
+        return {
+            restrict : "EA",
+            templateUrl : "test11-template.html",
+            replace : true,
+            scope : {
+                myModel : "=",
+                innerModel : "=myModel"
+            },
+            link : function(scope) {
+                console.log(scope);
+            }
+        };
+    });
+</script>
+</html>

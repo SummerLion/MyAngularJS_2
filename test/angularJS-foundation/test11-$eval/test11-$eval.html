@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MVC 示例</title>
+        <meta charset="utf-8">
+    </head>
+
+    <body ng-app="myApp">
+        <div ng-controller="myController1">
+        </div>
+    </body>
+
+    <script src="../../../lib/angular.js"></script>
+    <script>
+        var myApp = angular.module("myApp", []);
+        myApp.controller("myController1", ["$scope", function($scope){
+            $scope.num1 = 5;
+            $scope.num2 = 8;
+            var num3 = $scope.$eval("num1 + num2");
+            console.log(num3); // 13
+        }]);
+    </script>
+</html>

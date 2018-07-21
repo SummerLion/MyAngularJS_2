@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>指令属性 示例</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <div hello></div>
+</body>
+
+<script src="../../../lib/angular.js"></script>
+<script>
+    var myApp = angular.module("myApp", []);
+
+    myApp.controller("myController", ["$scope", function($scope){
+        $scope.greeting = {
+            text : "hello AngularJS"
+        };
+    }]);
+
+    myApp.directive("hello", function(){
+        return {
+            restrict : "EA",
+            template : "<h3>{{greeting.text}}</h3>",
+            scope : true,
+            controller : "myController"
+//            controller : ["$scope", function($scope){
+//                // 注意：实际应用场景中，指令的控制器中尽量不要进行业务逻辑处理.
+//                // 这里主要为了展示其使用形式,实际使用功能会在require属性示例中展示
+//                $scope.greeting = {
+//                    text : "hello AngularJS"
+//                };
+//            }]
+        };
+    });
+</script>
+</html>

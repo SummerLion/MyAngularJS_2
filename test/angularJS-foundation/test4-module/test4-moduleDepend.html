@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="myModule1">
+    <head>
+        <title>指令 示例</title>
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <hello></hello>
+    </body>
+
+    <script src="../../../lib/angular.js"></script>
+    <script>
+        var myModule = angular.module("myModule", []);
+        myModule.directive("hello", function(){
+            return {
+                restrict : "E",
+                template : "<div>hello angular</div>",
+                replace : true
+            }
+        });
+
+        angular.module("myModule1", ['myModule']);
+    </script>
+</html>

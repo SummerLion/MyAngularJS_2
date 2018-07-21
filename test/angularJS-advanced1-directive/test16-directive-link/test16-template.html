@@ -1,0 +1,6 @@
+<div>
+    <div ng-transclude ng-click="clickFn()"></div>
+    <div class="panel" ng-show="show">
+        <li class="item" ng-repeat="item in items" ng-bind="item.label" ng-click="clickLiFn(item)"></li>
+    </div>
+</div>
